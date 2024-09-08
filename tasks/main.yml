@@ -1,5 +1,64 @@
 ---
 # tasks file
-- name: Test Message
-  ansible.builtin.debug:
-    msg: "Hello World"
+- name: Generate SHA-512 hashed password using openssl
+  command: "openssl passwd -6 {{ batocera_root_password }}"
+  register: hashed_password
+
+- name: Get the current root line from /etc/shadow
+  command: "grep '^root:' /etc/shadow"
+  register: current_root_shadow
+
+- name: Replace root password in /etc/shadow
+  lineinfile:
+    path: /etc/shadow
+    regexp: '^root:'
+    line: "root:{{ hashed_password.stdout }}:{{ current_root_shadow.stdout.split(':', 2)[2] }}"
+    backup: yes
+  become: true
+  when: hashed_password is defined
+
+- name: Set hostname
+  ansible.builtin.copy:
+    dest: /etc/hostname
+    content: "{{ batocera_system_hostname }}\n"
+
+- name: Copy a version of batocera.conf that is dependent on the host type and version
+  ansible.builtin.template:
+    src: batocera_{{ batocera_host_type }}-{{ batocera_version }}.conf
+    dest: /userdata/system/batocera.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy a version of es_settings.cfg
+  ansible.builtin.template:
+    src: es_settings.cfg
+    dest: /userdata/system/configs/emulationstation/es_settings.cfg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Remount /boot fs as writable
+  ansible.builtin.shell: "mount -o remount,rw /boot"
+  args:
+    warn: no
+    
+- name: Copy a version of batocera-boot.conf
+  ansible.builtin.template:
+    src: batocera-boot.conf
+    dest: /boot/batocera-boot.conf
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Unconditionally reboot the machine with all defaults
+  ansible.builtin.reboot:
+  when: batocera_ssh_enabled == 1
+  
+- name: Delayed reboot
+  shell: /usr/bin/sleep 5 && /usr/sbin/reboot
+  async: 1
+  poll: 0
+  args:
+    executable: /bin/bash
+  when: batocera_ssh_enabled == 0

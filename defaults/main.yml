@@ -1,2 +1,18 @@
 ---
 # defaults file
+batocera_splash_screen_enabled: 1
+batocera_system_hostname: "BATOCERA"
+batocera_wifi_enabled: 0
+batocera_host_type: "bcm2711"
+batocera_system_language: "fr_FR"
+batocera_system_kblayout: "fr"
+batocera_system_timezone: "Europe/Paris"
+batocera_collections_systems_auto: "_beatemup,_fight,_shootemup,arcade,favorites,lightgun,recent"
+batocera_hidden_systems: "c64;ports"
+
+batocera_sharedevice: "NETWORK" # INTERNAL,ANYINTERNAL,NETWORK
+batocera_sharedevice_network_directives:
+  - {name: 'sharenetwork_smb', local_path: 'ROMS', hostname: '192.168.0.100', remote_path: 'games/emul/roms', auth: 'guest'}
+  - {name: 'sharenetwork_smb', local_path: 'SAVES', hostname: '192.168.0.100', remote_path: 'games/emul/saves', auth: 'username=batocera,password=5m8P455w0rd,vers=2.0'}
+  - {name: 'sharenetwork_smb', local_path: 'BIOS', hostname: '192.168.0.100', remote_path: 'games/emul/bios', auth: 'guest'}
+  - {name: 'sharenetwork_smb', local_path: 'MUSIC', hostname: '192.168.0.100', remote_path: 'music/rock', auth: 'guest'}

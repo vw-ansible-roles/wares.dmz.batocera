@@ -1,2 +1,12 @@
 ---
 # vars file
+batocera_system_security_enabled: 1
+batocera_updates_enabled: 1
+batocera_version: "40"
+batocera_audio_volume: 90
+batocera_audio_bgmusic: 1
+batocera_es_audiobgmusic: "false"
+batocera_es_themeset: "es-theme-carbon"
+batocera_ssh_enabled: 1
+batocera_samba_enabled: 0
+batocera_sharewait: 30
