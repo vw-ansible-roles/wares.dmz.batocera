@@ -4,6 +4,7 @@ batocera_splash_screen_enabled: 1
 batocera_system_hostname: "BATOCERA"
 batocera_wifi_enabled: 0
 batocera_host_type: "bcm2711"
+batocera_version: "41"
 batocera_system_language: "fr_FR"
 batocera_system_kblayout: "fr"
 batocera_system_timezone: "Europe/Paris"

@@ -40,12 +40,10 @@
 
 - name: Remount /boot fs as writable
   ansible.builtin.shell: "mount -o remount,rw /boot"
-  args:
-    warn: no
     
 - name: Copy a version of batocera-boot.conf
   ansible.builtin.template:
-    src: batocera-boot.conf
+    src: batocera-boot-{{ batocera_version }}.conf
     dest: /boot/batocera-boot.conf
     owner: root
     group: root
