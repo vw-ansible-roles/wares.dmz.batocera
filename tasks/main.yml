@@ -25,7 +25,7 @@
 - name: Copy a version of batocera.conf that is dependent on the host type and version
   ansible.builtin.template:
     src: batocera_{{ batocera_host_type }}-{{ batocera_version }}.conf
-    dest: /userdata/system/batocera.conf
+    dest: /media/SHARE/system/batocera.conf
     owner: root
     group: root
     mode: 0644
@@ -33,7 +33,7 @@
 - name: Copy a version of es_settings.cfg
   ansible.builtin.template:
     src: es_settings.cfg
-    dest: /userdata/system/configs/emulationstation/es_settings.cfg
+    dest: /media/SHARE/system/configs/emulationstation/es_settings.cfg
     owner: root
     group: root
     mode: 0644
