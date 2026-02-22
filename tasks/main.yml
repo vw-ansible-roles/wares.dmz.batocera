@@ -38,6 +38,16 @@
     group: root
     mode: 0644
 
+- name: Create custom ES config file for display resolution
+  copy:
+    content: |
+      #!/bin/bash
+      xrandr -s {{ batocera_custom_es_resolution }} -r {{ batocera_custom_es_frequency }}
+    dest: /userdata/system/custom-es-config
+    mode: '0644'
+    owner: root
+    group: root
+
 - name: Remount /boot fs as writable
   ansible.builtin.shell: "mount -o remount,rw /boot"
     

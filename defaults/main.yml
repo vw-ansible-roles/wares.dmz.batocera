@@ -10,6 +10,8 @@ batocera_system_kblayout: "fr"
 batocera_system_timezone: "Europe/Paris"
 batocera_collections_systems_auto: "_beatemup,_fight,_shootemup,arcade,favorites,lightgun,recent"
 batocera_hidden_systems: "c64;ports"
+batocera_custom_es_resolution: "1920x1080" # List infos : "export DISPLAY=:0.0 && xrandr"
+batocera_custom_es_frequency: 60 # List infos : "export DISPLAY=:0.0 && xrandr"
 
 batocera_sharedevice: "NETWORK" # INTERNAL,ANYINTERNAL,NETWORK
 batocera_sharedevice_network_directives:
